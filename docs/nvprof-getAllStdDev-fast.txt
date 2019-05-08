@@ -1,0 +1,51 @@
+PS D:\Documents\_CODE\repos\SSA-Cuda\x64\Release> nvprof .\SSA-Cuda.exe
+               SSA starts at 2018-05-31 14:23:56
+==============================================================
+ iter    optimum    pop_min  base_dist  mean_dist time_elapsed
+==============================================================
+==19596== NVPROF is profiling process 19596, command: .\SSA-Cuda.exe
+    1 2.631e+10 2.631e+10 5.605e+01 1.986e+03 00:00:00.650
+   10 2.568e+10 2.631e+10 5.700e+01 2.013e+03 00:00:00.906
+  100 1.765e+10 1.765e+10 5.839e+01 2.044e+03 00:00:02.866
+  200 1.765e+10 3.445e+10 5.782e+01 2.033e+03 00:00:05.255
+  300 1.644e+10 2.434e+10 5.652e+01 1.997e+03 00:00:07.898
+  400 1.644e+10 2.584e+10 5.643e+01 1.994e+03 00:00:10.639
+  500 1.644e+10 2.735e+10 5.711e+01 2.008e+03 00:00:12.991
+  600 1.644e+10 3.095e+10 5.680e+01 2.008e+03 00:00:16.016
+  700 1.644e+10 2.628e+10 5.747e+01 2.025e+03 00:00:18.788
+  800 1.644e+10 2.761e+10 5.696e+01 2.007e+03 00:00:21.558
+  900 1.644e+10 2.648e+10 5.730e+01 2.021e+03 00:00:24.139
+ 1000 1.644e+10 2.646e+10 5.689e+01 2.010e+03 00:00:26.624
+==============================================================
+ 1000 1.644e+10 2.646e+10 5.689e+01 2.010e+03 00:00:26.627
+==============================================================
+
+==19596== Profiling application: .\SSA-Cuda.exe
+==19596== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   43.97%  2.63433s      1000  2.6343ms  2.6252ms  2.6432ms  getAllDistances(float*, float**, unsigned __int64, unsigned __int64)
+                   26.80%  1.60591s     30000  53.530us  41.120us  60.128us  randomWalkKernel(float**, float*, float*, unsigned int*, float*, curandStateXORWOW*, unsigned __int64, unsigned __int64)
+                   16.30%  976.38ms      1000  976.38us  974.68us  983.39us  getAllFitnesses(float*, float*, unsigned __int64, unsigned __int64)
+                    4.82%  288.93ms      1000  288.93us  251.62us  2.1845ms  chooseVibrationKernel(int*, float*, float**, float**, float*, float**, unsigned __int64, unsigned __int64, float)
+                    3.52%  210.84ms      1000  210.84us  210.11us  242.05us  void thrust::cuda_cub::cub::DeviceReduceSingleTileKernel<thrust::cuda_cub::cub::DeviceReducePolicy<float, int, thrust::plus<float>>::Policy600, thrust::device_ptr<float>, thrust::detail::normal_iterator<thrust::pointer<float, thrust::cuda_cub::tag, thrust::use_default, thrust::use_default>>, int, thrust::plus<float>, float>(int, float, thrust::plus<float>, thrust::cuda_cub::cub::DeviceReducePolicy<float, int, thrust::plus<float>>::Policy600, float)
+                    2.47%  148.00ms    193000     766ns     639ns  6.1120us  [CUDA memcpy HtoD]
+                    1.02%  61.073ms      1000  61.072us  60.896us  62.591us  getAllStdDev(float*, float*, unsigned __int64, unsigned __int64)
+                    0.99%  59.168ms     65000     910ns     639ns  6.0480us  [CUDA memcpy DtoH]
+                    0.12%  7.1253ms         1  7.1253ms  7.1253ms  7.1253ms  curandInitKernel(unsigned __int64, curandStateXORWOW*, unsigned __int64)
+      API calls:   71.40%  18.3733s    257000  71.491us  11.700us  38.443ms  cudaMemcpy
+                   12.90%  3.31945s    196001  16.935us  10.000us  339.70us  cudaFree
+                   11.41%  2.93557s    198001  14.826us  5.9000us  206.68ms  cudaMalloc
+                    2.20%  566.99ms     35001  16.199us  7.7000us  15.145ms  cudaLaunch
+                    1.34%  346.01ms      1000  346.01us  315.40us  453.20us  cudaDeviceSynchronize
+                    0.28%  72.845ms    266003     273ns     100ns  116.00us  cudaSetupArgument
+                    0.27%  70.026ms      1000  70.025us  40.100us  177.40us  cudaMemcpyAsync
+                    0.08%  20.792ms     35001     594ns     200ns  35.400us  cudaConfigureCall
+                    0.04%  11.497ms      1000  11.496us  7.5000us  68.000us  cudaStreamSynchronize
+                    0.04%  9.2322ms      2000  4.6160us  2.7000us  45.300us  cudaFuncGetAttributes
+                    0.02%  4.9211ms        94  52.352us     200ns  2.4264ms  cuDeviceGetAttribute
+                    0.00%  1.2763ms         1  1.2763ms  1.2763ms  1.2763ms  cuDeviceGetName
+                    0.00%  479.40us      1000     479ns     200ns  5.0000us  cudaGetLastError
+                    0.00%  432.30us      1000     432ns     200ns  18.500us  cudaPeekAtLastError
+                    0.00%  21.500us         1  21.500us  21.500us  21.500us  cuDeviceTotalMem
+                    0.00%  12.700us         3  4.2330us     400ns  11.200us  cuDeviceGetCount
+                    0.00%  2.4000us         2  1.2000us     400ns  2.0000us  cuDeviceGet

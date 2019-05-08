@@ -1,0 +1,53 @@
+PS D:\Documents\_CODE\repos\SSA-Cuda\x64\Release> nvprof .\SSA-Cuda.exe
+               SSA starts at 2018-05-16 15:47:22
+==============================================================
+ iter    optimum    pop_min  base_dist  mean_dist time_elapsed
+==============================================================
+==2008== NVPROF is profiling process 2008, command: .\SSA-Cuda.exe
+    1 2.168e+10 2.168e+10 5.723e+01 2.019e+03 00:00:01.309
+   10 2.098e+10 2.290e+10 5.809e+01 2.048e+03 00:00:01.742
+  100 1.130e+10 2.260e+10 5.773e+01 2.022e+03 00:00:06.019
+  200 1.130e+10 2.301e+10 5.840e+01 2.056e+03 00:00:10.790
+  300 1.098e+10 2.109e+10 5.746e+01 2.027e+03 00:00:15.799
+  400 1.098e+10 1.431e+10 5.716e+01 2.012e+03 00:00:20.785
+  500 1.098e+10 2.684e+10 5.773e+01 2.034e+03 00:00:25.642
+  600 1.098e+10 2.336e+10 5.828e+01 2.047e+03 00:00:30.979
+  700 1.098e+10 2.456e+10 5.856e+01 2.068e+03 00:00:35.919
+  800 1.098e+10 2.190e+10 5.865e+01 2.061e+03 00:00:40.947
+  900 9.852e+09 1.555e+10 5.793e+01 2.039e+03 00:00:45.952
+ 1000 9.852e+09 2.514e+10 5.901e+01 2.063e+03 00:00:50.837
+==============================================================
+ 1000 9.852e+09 2.514e+10 5.901e+01 2.063e+03 00:00:50.842
+==============================================================
+
+==2008== Profiling application: .\SSA-Cuda.exe
+==2008== Profiling result:
+            Type  Time(%)      Time  Calls (host)  Calls (device)       Avg       Min       Max  Name
+ GPU activities:   43.57%  12.2350s          1000               0  12.235ms  12.178ms  13.386ms  getAllStdDev(float*, float*, unsigned __int64, unsigned __int64)
+                   19.04%  5.34607s             0           30000  178.20us  174.27us  435.84us  void thrust::cuda_cub::cub::DeviceReduceSingleTileKernel<thrust::cuda_cub::cub::DeviceReducePolicy<float, int, thrust::plus<float>>::Policy600, thrust::cuda_cub::transform_input_iterator_t<float, float*, variance_functor<float>>, thrust::detail::normal_iterator<thrust::pointer<float, thrust::cuda_cub::par_t, thrust::use_default, thrust::use_default>>, int, thrust::plus<float>, float>(int, float, thrust::plus<float>, thrust::cuda_cub::cub::DeviceReducePolicy<float, int, thrust::plus<float>>::Policy600, float)
+                   17.73%  4.97876s             0           30000  165.96us  162.01us  217.44us  void thrust::cuda_cub::cub::DeviceReduceSingleTileKernel<thrust::cuda_cub::cub::DeviceReducePolicy<float, int, thrust::plus<float>>::Policy600, float*, thrust::detail::normal_iterator<thrust::pointer<float, thrust::cuda_cub::par_t, thrust::use_default, thrust::use_default>>, int, thrust::plus<float>, float>(int, float, thrust::plus<float>, thrust::cuda_cub::cub::DeviceReducePolicy<float, int, thrust::plus<float>>::Policy600, float*)
+                    8.67%  2.43561s          1000               0  2.4356ms  2.4256ms  2.6358ms  getAllDistances(float*, float**, unsigned __int64, unsigned __int64)
+                    5.30%  1.48897s         30000               0  49.632us  38.015us  61.023us  randomWalkKernel(float**, float*, float*, unsigned int*, float*, curandStateXORWOW*, unsigned __int64, unsigned __int64)
+                    3.21%  902.75ms          1000               0  902.75us  899.61us  981.53us  getAllFitnesses(float*, float*, unsigned __int64, unsigned __int64)
+                    0.96%  269.29ms          1000               0  269.29us  233.31us  2.1811ms  chooseVibrationKernel(int*, float*, float**, float**, float*, float**, unsigned __int64, unsigned __int64, float)
+                    0.78%  217.64ms          1000               0  217.64us  213.44us  238.97us  void thrust::cuda_cub::cub::DeviceReduceSingleTileKernel<thrust::cuda_cub::cub::DeviceReducePolicy<float, int, thrust::plus<float>>::Policy600, thrust::device_ptr<float>, thrust::detail::normal_iterator<thrust::pointer<float, thrust::cuda_cub::tag, thrust::use_default, thrust::use_default>>, int, thrust::plus<float>, float>(int, float, thrust::plus<float>, thrust::cuda_cub::cub::DeviceReducePolicy<float, int, thrust::plus<float>>::Policy600, float)
+                    0.51%  141.98ms        193000               -     735ns     607ns  1.6000us  [CUDA memcpy HtoD]
+                    0.20%  56.500ms         65000               -     869ns     608ns  1.6000us  [CUDA memcpy DtoH]
+                    0.02%  7.0136ms             1               0  7.0136ms  7.0136ms  7.0136ms  curandInitKernel(unsigned __int64, curandStateXORWOW*, unsigned __int64)
+      API calls:   49.09%  24.1885s        257000               -  94.118us  24.200us  63.385ms  cudaMemcpy
+                   25.54%  12.5843s          1000               -  12.584ms  12.505ms  13.683ms  cudaDeviceSynchronize
+                   11.70%  5.76290s        196001               -  29.402us  21.500us  690.80us  cudaFree
+                   10.79%  5.31816s        198001               -  26.859us  14.200us  491.50ms  cudaMalloc
+                    2.16%  1.06468s         35001               -  30.418us  19.400us  50.665ms  cudaLaunch
+                    0.31%  151.65ms          1000               -  151.65us  89.400us  379.20us  cudaMemcpyAsync
+                    0.23%  115.70ms        266003               -     434ns     300ns  280.30us  cudaSetupArgument
+                    0.07%  34.722ms         35001               -     992ns     500ns  114.00us  cudaConfigureCall
+                    0.04%  18.288ms          1000               -  18.288us  15.100us  93.500us  cudaStreamSynchronize
+                    0.03%  15.851ms          2000               -  7.9250us  5.9000us  29.800us  cudaFuncGetAttributes
+                    0.02%  10.936ms            94               -  116.34us     300ns  6.8088ms  cuDeviceGetAttribute
+                    0.00%  2.1993ms             1               -  2.1993ms  2.1993ms  2.1993ms  cuDeviceGetName
+                    0.00%  1.4556ms          1000               -  1.4550us     600ns  33.700us  cudaGetLastError
+                    0.00%  916.10us          1000               -     916ns     500ns  239.90us  cudaPeekAtLastError
+                    0.00%  30.000us             1               -  30.000us  30.000us  30.000us  cuDeviceTotalMem
+                    0.00%  16.100us             3               -  5.3660us     700ns  13.100us  cuDeviceGetCount
+                    0.00%  3.9000us             2               -  1.9500us     900ns  3.0000us  cuDeviceGet
